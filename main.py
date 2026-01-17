@@ -12,7 +12,6 @@ from typing import Any, Dict, Final, Iterable, List, Optional
 import latest_user_agents
 import user_agents
 import zendriver
-from selenium_authenticated_proxy import SeleniumAuthenticatedProxy
 from zendriver import cdp
 from zendriver.cdp.emulation import UserAgentBrandVersion, UserAgentMetadata
 from zendriver.cdp.network import T_JSON_DICT, Cookie
@@ -89,9 +88,6 @@ class CloudflareSolver:
 
         if not http3:
             config.add_argument("--disable-quic")
-
-        auth_proxy = SeleniumAuthenticatedProxy(proxy)
-        auth_proxy.enrich_chrome_options(config)
 
         self.driver = zendriver.Browser(config)
         self._timeout = timeout
